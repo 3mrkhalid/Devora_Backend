@@ -60,7 +60,7 @@ Devora_Backend/
 │       └── main.go
 ├── internal/
 │   ├── config/
-│   ├── handlers/
+│   ├── controllers/
 │   ├── services/
 │   ├── repositories/
 │   └── models/
