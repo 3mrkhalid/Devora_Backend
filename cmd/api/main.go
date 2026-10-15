@@ -1,3 +1,4 @@
+
 package main
 
 import (
@@ -5,10 +6,12 @@ import (
 	"net/http"
 	"os"
 
-	"devora/internal/platform/database"
 	"devora/internal/middlewares"
-	repositories "devora/internal/repositories/user"
-	"devora/internal/services"
+	"devora/internal/platform/database"
+	auth_repositories "devora/internal/repositories/auth"
+	user_repositories "devora/internal/repositories/user"
+	auth_services "devora/internal/services/auth"
+	user_services "devora/internal/services/user"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -34,12 +37,14 @@ func main() {
 	router := gin.Default()
 	router.Use(middlewares.NewCORS())
 
-	userRepo := repositories.NewUserRepository(db)
-	userService := services.NewUserService(userRepo)
+	userRepo := user_repositories.NewUserRepository(db)
+	userService := user_services.NewUserService(userRepo)
 
-	// TODO: Use userService in your handlers.
+	loginRepo := auth_repositories.NewLoginRepository(db)
+	authService := auth_services.NewAuthService(loginRepo)
 
-	_ = userService
+	// TODO: Pass userService and authService to their handlers.
+	_, _ = userService, authService
 
 	router.GET("/", welcome)
 
