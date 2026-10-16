@@ -40,7 +40,7 @@ func main() {
 	userRepo := user_repositories.NewUserRepository(db)
 	userService := user_services.NewUserService(userRepo)
 
-	loginRepo := auth_repositories.NewLoginRepository(db)
+	loginRepo := auth_repositories.NewAuthRepository(db)
 	authService := auth_services.NewAuthService(loginRepo)
 
 	// TODO: Pass userService and authService to their handlers.

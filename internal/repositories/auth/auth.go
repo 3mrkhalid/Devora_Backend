@@ -9,17 +9,17 @@ import (
 	"devora/internal/models"
 )
 
-type LoginRepository struct {
+type AuthRepository struct {
 	DB *sql.DB
 }
 
-func NewLoginRepository(db *sql.DB) *LoginRepository {
-	return &LoginRepository{
+func NewAuthRepository(db *sql.DB) *AuthRepository {
+	return &AuthRepository{
 		DB: db,
 	}
 }
 
-func (r *LoginRepository) CheckUser(
+func (r *AuthRepository) CheckUser(
 	ctx context.Context,
 	email string,
 ) (models.User, error) {
