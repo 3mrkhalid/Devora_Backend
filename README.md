@@ -54,24 +54,57 @@ This repository contains the backend API and supporting infrastructure for the D
 The backend is being organized into focused components to separate HTTP handling, business logic, data access, and infrastructure.
 
 ```text
-Devora_Backend/
-├── cmd/
-│   └── api/
-│       └── main.go
-├── internal/
-│   ├── config/
-│   ├── controllers/
-│   ├── services/
-│   ├── repositories/
-│   └── models/
-├── platform/
-│   └── database/
-│       └── mysql.go
-├── .env.example
+.
+├── cmd
+│   └── api
+│       └── main.go
+├── .env
 ├── .gitignore
 ├── go.mod
 ├── go.sum
-└── README.md
+├── internal
+│   ├── config
+│   │   └── allowOrigions.go
+│   ├── controllers
+│   │   ├── auth
+│   │   │   ├── login.go
+│   │   │   ├── logout.go
+│   │   │   └── register.go
+│   │   ├── friends
+│   │   ├── groups
+│   │   ├── posts
+│   │   ├── repos
+│   │   └── users
+│   ├── middlewares
+│   │   └── cors.go
+│   ├── models
+│   │   ├── friendship.go
+│   │   ├── group.go
+│   │   ├── group_member.go
+│   │   └── user.go
+│   ├── platform
+│   │   ├── database
+│   │   │   └── mysql.go
+│   │   └── logger
+│   ├── repositories
+│   │   ├── auth
+│   │   │   └── auth.go
+│   │   └── user
+│   │       └── user.go
+│   ├── routes/
+│   └── services
+│       ├── auth
+│       │   ├── auth_service.go
+│       │   ├── errors.go
+│       │   ├── login.go
+│       │   └── register.go
+│       └── user
+│           └── user.go
+├── Makefile
+├── migrations/
+├── README.md
+├── realtime/
+└── tests/
 ```
 
 *The structure is a development guide; directories and components may change as implementation progresses.*
