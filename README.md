@@ -54,57 +54,31 @@ This repository contains the backend API and supporting infrastructure for the D
 The backend is being organized into focused components to separate HTTP handling, business logic, data access, and infrastructure.
 
 ```text
-.
-├── cmd
-│   └── api
-│       └── main.go
-├── .env
-├── .gitignore
-├── go.mod
-├── go.sum
-├── internal
-│   ├── config
-│   │   └── allowOrigions.go
-│   ├── controllers
-│   │   ├── auth
-│   │   │   ├── login.go
-│   │   │   ├── logout.go
-│   │   │   └── register.go
-│   │   ├── friends
-│   │   ├── groups
-│   │   ├── posts
-│   │   ├── repos
-│   │   └── users
-│   ├── middlewares
-│   │   └── cors.go
-│   ├── models
-│   │   ├── friendship.go
-│   │   ├── group.go
-│   │   ├── group_member.go
-│   │   └── user.go
-│   ├── platform
-│   │   ├── database
-│   │   │   └── mysql.go
-│   │   └── logger
-│   ├── repositories
-│   │   ├── auth
-│   │   │   └── auth.go
-│   │   └── user
-│   │       └── user.go
-│   ├── routes/
-│   └── services
-│       ├── auth
-│       │   ├── auth_service.go
-│       │   ├── errors.go
-│       │   ├── login.go
-│       │   └── register.go
-│       └── user
-│           └── user.go
+
+devora/
+├── cmd/
+│   └── api/
+│       └── main.go
+├── internal/
+│   ├── config/
+│   ├── controllers/
+│   │   ├── auth/
+│   │   ├── users/
+│   │   ├── posts/
+│   │   ├── friends/
+│   │   └── groups/
+│   ├── middlewares/
+│   ├── models/
+│   ├── repositories/
+│   ├── services/
+│   └── platform/
+│       └── database/
+├── .env.example
+├── Dockerfile
+├── docker-compose.yml
 ├── Makefile
-├── migrations/
-├── README.md
-├── realtime/
-└── tests/
+├── go.mod
+└── README.md
 ```
 
 *The structure is a development guide; directories and components may change as implementation progresses.*
