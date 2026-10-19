@@ -3,6 +3,7 @@ package auth
 import (
 	auth_services "devora/internal/services/auth"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,6 +22,7 @@ func LoginHandler(authService *auth_services.AuthService) gin.HandlerFunc {
       		c.JSON(http.StatusBadRequest, gin.H {
         		"error":"Invalid Email or Password Format",
         	})
+        	return
       	}
        
         user, err := authService.VerifyLogin(
@@ -35,10 +37,26 @@ func LoginHandler(authService *auth_services.AuthService) gin.HandlerFunc {
             return
         }
 
-        // Return a safe user response; do not expose the password hash.
-        _ = user
+        isProduction := os.Getenv("APP_ENV") == "production"
+        
+        c.SetCookie(
+            "refresh_token",
+            user.RefreshToken,
+            7*24*60*60,
+            "/",
+            "",
+            isProduction,
+            true,
+        )
 
-        //Access token and Refresh token LoginHandler
-        // return a respone {"message":{{"login success", Access_Token}}
+        c.JSON(http.StatusOK, gin.H{
+            "message": "Login successful",
+            "user": gin.H{
+                "id": user.ID,
+                "email": user.Email,
+                "username": user.Username,
+            },
+            "accessToken": user.AccessToken,
+        })
     }
 }

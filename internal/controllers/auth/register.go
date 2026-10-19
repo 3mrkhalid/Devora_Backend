@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	auth_services "devora/internal/services/auth"
+	"os"
 )
 
 
@@ -35,16 +36,28 @@ func Register(authService *auth_services.AuthService) gin.HandlerFunc {
 		}
 
 
-		c.JSON(http.StatusAccepted, gin.H{
-			"data": gin.H{
-				"message": "user registered successfully",
-				"user": gin.H{
-					"id": user.ID,
-					"username": user.Username,
-					"email": user.Email,
-				},
-			},
-		})
+		isProduction := os.Getenv("APP_ENV") == "production"
+        
+        c.SetCookie(
+            "refresh_token",
+            user.RefreshToken,
+            7*24*60*60,
+            "/",
+            "",
+            isProduction,
+            true,
+        )
+
+        c.JSON(http.StatusOK, gin.H{
+            "message": "Registration successful",
+            "user": gin.H{
+                "id": user.ID,
+                "email": user.Email,
+                "username": user.Username,
+            },
+            "accessToken": user.AccessToken,
+        })
+
 	}
 }
 
