@@ -55,30 +55,41 @@ The backend is being organized into focused components to separate HTTP handling
 
 ```text
 
-devora/
-├── cmd/
-│   └── api/
-│       └── main.go
-├── internal/
-│   ├── config/
-│   ├── controllers/
-│   │   ├── auth/
-│   │   ├── users/
-│   │   ├── posts/
-│   │   ├── friends/
-│   │   └── groups/
-│   ├── middlewares/
-│   ├── models/
-│   ├── repositories/
-│   ├── services/
-│   └── platform/
-│       └── database/
-├── .env.example
-├── Dockerfile
-├── docker-compose.yml
-├── Makefile
+.
+├── cmd
+│   └── api
+│       └── main.go
+├── .env
+├── .gitignore
 ├── go.mod
-└── README.md
+├── go.sum
+├── internal/
+│   ├── config/
+│   ├── controllers
+│   │   ├── auth/
+│   │   ├── friends/
+│   │   ├── groups/
+│   │   ├── posts/
+│   │   ├── repos/
+│   │   └── users/
+│   ├── middlewares/
+│   ├── models/
+│   ├── platform/
+│   │   ├── database/
+│   │   └── logger/
+│   ├── repositories/
+│   │   ├── auth/
+│   │   └── user/
+│   ├── routes
+│   ├── services
+│   │   ├── auth/
+│   │   └── user/
+│   └── utils/
+├── Makefile
+├── migrations
+├── README.md
+├── realtime/
+└── tests/
 ```
 
 *The structure is a development guide; directories and components may change as implementation progresses.*
