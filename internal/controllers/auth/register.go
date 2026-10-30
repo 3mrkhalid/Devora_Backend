@@ -10,6 +10,7 @@ import (
 
 type RegisterRequest struct {
 	Username string `json:"username" binding:"required"`
+	FullName string `json:"fullName" binding:"required"`
 	Email    string `json:"email" binding:"required,email,max=255"`
 	Password string `json:"password" binding:"required,min=8"`
 }
@@ -29,7 +30,7 @@ func Register(authService *auth_services.AuthService) gin.HandlerFunc {
 			return
 		}
 
-		user, err := authService.RegisterUser(c.Request.Context(), req.Username, req.Email, req.Password)
+		user, err := authService.RegisterUser(c.Request.Context(), req.Username, req.FullName, req.Email, req.Password)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return

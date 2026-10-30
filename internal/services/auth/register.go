@@ -20,6 +20,7 @@ import (
 type RegisterRequest struct {
 	ID          int64  `json:"id"`
 	Username    string `json:"username"`
+	FullName    string `json:"fullName"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	AccessToken string `json:"accessToken"`
@@ -48,6 +49,7 @@ func (s *AuthService) CheckEmail(
 func (s *AuthService) RegisterUser(
 	ctx context.Context,
 	username string,
+	fullName string,
 	email string,
 	password string,
 ) (RegisterRequest, error) {
@@ -59,6 +61,7 @@ func (s *AuthService) RegisterUser(
 
 	newUser := models.User{
 		Username: username,
+		Fullname: fullName,
 		Email:    email,
 		Password: string(hashedPassword),
 	}

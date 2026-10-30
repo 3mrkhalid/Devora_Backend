@@ -86,7 +86,7 @@ The backend is being organized into focused components to separate HTTP handling
 │   │   └── user/
 │   └── utils/
 ├── Makefile
-├── migrations
+├── migrations/
 ├── README.md
 ├── realtime/
 └── tests/

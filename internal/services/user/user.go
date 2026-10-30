@@ -17,7 +17,7 @@ func NewUserService(repo *repositories.UserRepository) *UserService {
 	}
 }
 
-func (s *UserService) GetUserByID(id int) (*models.User, error) {
+func (s *UserService) GetUserByID(id int64) (*models.User, error) {
 	if id <= 0 {
 		return nil, errors.New("invalid user ID")
 	}

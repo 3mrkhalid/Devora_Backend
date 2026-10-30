@@ -23,7 +23,7 @@ func (r *AuthRepository) CheckUser(
 	email string,
 ) (models.User, error) {
 	query := `
-		SELECT id, username, email, password
+		SELECT id, username, email, password_hash
 		FROM users
 		WHERE email = ?
 	`
@@ -49,14 +49,15 @@ func (r *AuthRepository) CreateUser(
     user models.User,
 ) (models.User, error) {
     query := `
-        INSERT INTO users (username, email, password)
-        VALUES (?, ?, ?)
+        INSERT INTO users (username, fullname, email, password_hash)
+        VALUES (?, ?, ?, ?)
     `
 
     result, err := r.DB.ExecContext(
         ctx,
         query,
         user.Username,
+        user.Fullname,
         user.Email,
         user.Password,
     )

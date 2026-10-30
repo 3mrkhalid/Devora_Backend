@@ -18,7 +18,7 @@ func NewUserRepository(db *sql.DB) *UserRepository {
     }
 }
 
-func (r *UserRepository) FindByID(id int) (*models.User, error) {
+func (r *UserRepository) FindByID(id int64) (*models.User, error) {
     query := `
         SELECT id, username, email
         FROM users

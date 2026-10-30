@@ -1,12 +1,13 @@
 package main
 
 import (
+	"devora/internal/middlewares"
+	"devora/internal/platform/database"
+	"devora/internal/routes"
 	"log"
 	"net/http"
 	"os"
 
-	"devora/internal/middlewares"
-	"devora/internal/platform/database"
 	auth_repositories "devora/internal/repositories/auth"
 	user_repositories "devora/internal/repositories/user"
 	auth_services "devora/internal/services/auth"
@@ -42,6 +43,11 @@ func main() {
 	loginRepo := auth_repositories.NewAuthRepository(db)
 	authService := auth_services.NewAuthService(loginRepo)
 
+	// EndPoint
+	api := router.Group("/api")
+	routes.AuthRoutes(api, authService)
+
+	
 	// TODO: Pass userService and authService to their handlers.
 	_, _ = userService, authService
 
